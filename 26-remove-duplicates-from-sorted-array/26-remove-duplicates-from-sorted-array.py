@@ -1,9 +1,11 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        spointer, pointer = 0, float("inf")
-        for val in nums:
-            if val != pointer:
-                nums[spointer] = val
-                spointer += 1
-            pointer = val
-        return spointer
+        pointer, spointer = 0, 0
+        
+        while len(nums) > spointer:
+            if nums[pointer] != nums[spointer]:
+                nums[pointer + 1] = nums[spointer]
+                pointer += 1
+            spointer += 1
+        
+        return pointer + 1
