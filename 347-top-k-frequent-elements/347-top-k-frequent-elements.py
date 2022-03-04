@@ -6,9 +6,10 @@ class Solution:
         for key in arr:
             kval.append((arr[key] , key))
             
-        heapq._heapify_max(kval)
+        kval = [(-x,y) for x,y in kval]
+        heapq.heapify(kval)
     
         for i in range(k):
-            ans.append(heapq._heappop_max(kval)[1])
+            ans.append(heapq.heappop(kval)[1])
             
         return ans
