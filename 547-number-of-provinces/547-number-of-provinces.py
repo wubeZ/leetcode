@@ -1,28 +1,19 @@
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        visited = set()
-        queue = deque([])
-        count = 0
+        n = len(isConnected)
+        visited = [False]*n
+        province = 0
         
-        def bfs(r):
-            queue.append(r)
-            while queue:
-                row = queue.popleft()
-                j = 0
-                while j < len(isConnected):
-                    if j not in visited and isConnected[row][j] == 1:
-                        visited.add(j)
-                        queue.append(j)
-                    j += 1
+        def dfs(start):
+            visited[start] = True
+            for i ,con in enumerate(isConnected[start]):
+                if con == 1 and not visited[i]:
+                    dfs(i)            
         
-        for i in range(len(isConnected)):
-            if i not in visited:
-                count += 1
-                visited.add(i)
-                bfs(i)
-                
-        return count
-                                        
+        for i in range(n):
+            if not visited[i]:
+                province += 1
+                dfs(i)
         
-        
+        return province
         
