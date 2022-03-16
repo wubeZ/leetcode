@@ -11,18 +11,22 @@
 
 class Solution:
     def findSolution(self, customfunction: 'CustomFunction', z: int) -> List[List[int]]:
-        left, right = 1, 1000
+        right = 1000
         ans = []
         
-        while left <= 1000:
-            
-            while right > 1 and customfunction.f(left,right) > z:
-                right -= 1
-            if customfunction.f(left,right) == z:
-                ans.append([left,right])
-            
-            left += 1
-        
+        for i in range(1,1000):
+            left = 1
+            while left <= right:
+                mid = left + (right - left)//2
+                if customfunction.f(i,mid) < z:
+                    left = mid + 1
+                elif customfunction.f(i,mid) > z:
+                    right = mid - 1
+                else:
+                    ans.append([i,mid])
+                    break
+                    
         return ans
+                
             
                 
