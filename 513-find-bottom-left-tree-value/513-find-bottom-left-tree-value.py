@@ -7,10 +7,10 @@
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
         queue = deque([root])
-        result = []
+        
         while queue:
-            temp = [x.val for x in queue]
-            result.append(temp)
+            result = []
+            result = [x.val for x in queue]
             n = len(queue)
             i = 0
             while i < n:
@@ -22,50 +22,4 @@ class Solution:
 
                 i += 1
         
-        return result[-1][0]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# if not root.left and not root.right:
-#             return root.val
-        
-#         self.res = 0
-#         def dfs(node, level, maxlevel):
-#             if not node:
-#                 return
-    
-#             if node.left:
-#                 if not node.left.left and not node.left.right:
-#                     if maxlevel <= level:
-#                         maxlevel = level
-#                         self.res = node.left.val
-                
-#             dfs(node.left,level+1,maxlevel)
-#             dfs(node.right, level+1,maxlevel)
-            
-#             return self.res
-        
-#         dfs(root,0,0) 
-        
-#         return self.res
+        return result[0]
