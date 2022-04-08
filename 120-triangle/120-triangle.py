@@ -1,15 +1,9 @@
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
-        memo = {}
-        def dp(i,j):
-            if i == len(triangle)-1:
-                return triangle[i][j]
-            
-            if (i,j) in memo:
-                return memo[(i,j)]
-            
-            memo[(i,j)] = min(dp(i+1,j),dp(i+1,j+1)) + triangle[i][j]
-            
-            return memo[(i,j)]
+        dp = triangle[-1]
         
-        return dp(0,0)
+        for i in range(len(triangle)-2,-1,-1):
+            for j in range(len(triangle[i])):
+                dp[j] = min(dp[j], dp[j+1]) + triangle[i][j]
+        
+        return dp[0]
