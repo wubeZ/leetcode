@@ -11,10 +11,6 @@ class Solution:
         
         for i in range(len(supplies)):
             indegree[supplies[i]] = 0
-        
-        for i in range(len(recipes)):
-            if indegree[recipes[i]] == 0:
-                queue.append(recipes[i])
                 
         for i in range(len(supplies)):
             if indegree[supplies[i]] == 0:
