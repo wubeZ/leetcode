@@ -7,6 +7,7 @@ class Solution:
             
             if len(path) == k and sum(path) == n:
                 result.append(path)
+                return
             
             
             for i in range(len(nums)):
