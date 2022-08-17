@@ -3,13 +3,11 @@ class Solution:
         d = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
         
         ans = set()
-        for i in range(len(words)):
-            res = ""
-            for j in range(len(words[i])):
-                char = words[i][j]
-                idx = ord(char) - ord("a")
-                res += d[idx]
-            ans.add(res)
+        for word in words:
+            res = []
+            for char in word:
+                res.append(d[ord(char) - 97])
+            ans.add("".join(res))
         
         return len(ans)
                 
