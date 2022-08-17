@@ -1,11 +1,11 @@
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        prefix = [0] * (len(gas)+1)
+        prefix = 0
         
         for i in range(len(gas)):
-            prefix[i+1] = prefix[i] + gas[i] - cost[i]
+            prefix += (gas[i] - cost[i])
         
-        if prefix[-1] < 0: return -1
+        if prefix < 0: return -1
                 
         ans, pref = 0, 0
         for i in range(len(gas)):
