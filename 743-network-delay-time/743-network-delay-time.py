@@ -20,8 +20,7 @@ class Solution:
                 visited.add(cur)
                 dis[cur] = time
                 for i, node in graph[cur]:
-                    if node not in visited:
-                        heapq.heappush(queue, (time + i, node))
+                    heapq.heappush(queue, (time + i, node))
                         
         if max(dis) == float("inf"): return -1
         else:
