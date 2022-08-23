@@ -10,7 +10,7 @@ class Solution:
                 if stack and stack[-1] in d and d[stack[-1]] == bracket:
                     stack.pop()
                 else:
-                    stack.append(bracket)
+                    return False
         
         return False if stack else True
             
