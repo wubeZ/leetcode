@@ -3,16 +3,12 @@ class Solution:
         count = 0
         n = target
         
-        while n != 1:
-            if n%2 == 0 and maxDoubles > 0:
+        while n and maxDoubles:
+            if n%2 == 0:
                 n //= 2
                 maxDoubles -= 1
-                count += 1
-            elif n%2 != 0 and maxDoubles > 0:
-                n -= 1
-                count += 1
             else:
-                count += (n - 1)
-                n = 1
-                
-        return count
+                n -= 1
+            count += 1
+            
+        return count + n - 1
