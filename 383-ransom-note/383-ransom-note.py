@@ -1,9 +1,9 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        counter = Counter(magazine)
-        for ch in ransomNote:
-            if ch not in counter or counter[ch] == 0:
+        d = Counter(magazine)
+        for i in ransomNote:
+            if d[i] >= 1:
+                d[i] -= 1
+            else:
                 return False
-            counter[ch] -= 1
-        
         return True
