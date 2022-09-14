@@ -7,16 +7,25 @@
 class Solution:
     def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
         self.ans = 0
+        d = [0] * 10
         
-        def dfs(node, path):
+        def check():
+            count = 0
+            for i in range(len(d)):
+                if d[i]%2 != 0: count += 1    
+            if count > 1 : return False
+            return True
+        
+        def dfs(node):
             if node:
-                path = path ^ (1 << node.val)
+                d[node.val] += 1
                 if not node.left and not node.right:
-                    if path & (path - 1) == 0: self.ans += 1 
+                    if check(): self.ans += 1
                 else:
-                    dfs(node.left , path)
-                    dfs(node.right, path)
-
-        dfs(root, 0)
+                    dfs(node.left)
+                    dfs(node.right)
+                d[node.val] -= 1
+                
+        dfs(root)
         
         return self.ans
