@@ -7,13 +7,13 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         
-        def dfs(node, path, targetSum):
+        def dfs(node, path, sums):
             if node.left:
-                dfs(node.left, path + [node.left.val], targetSum)
+                dfs(node.left, path + [node.left.val], sums + node.left.val)
             if node.right:
-                dfs(node.right, path + [node.right.val], targetSum)
+                dfs(node.right, path + [node.right.val], sums + node.right.val)
             if not node.left and not node.right:
-                if sum(path) == targetSum:
+                if sums == targetSum:
                     ans.append(path[::])
                     return
                 
@@ -22,6 +22,6 @@ class Solution:
         ans = []
         if not root: return ans
         
-        dfs(root, [root.val], targetSum)
+        dfs(root, [root.val], root.val)
         
         return ans
