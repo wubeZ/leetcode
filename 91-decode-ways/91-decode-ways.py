@@ -1,12 +1,17 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-        dp = [0] * (len(s) + 1)
-        dp[-1] = 1
+        memo = {}
+        def dfs(i):
+            if i == len(s):
+                return 1
+            if i in memo: return memo[i]
+            if int(s[i]) == 0:
+                return 0
+            if int(s[i])!= 0 and int(s[i]) < 10:
+                res = dfs(i+1)
+            if (i+1 < len(s)) and (int(s[i]) == 1 or int(s[i]) == 2 and int(s[i+1]) < 7):
+                res += dfs(i+2)
+            memo[i] = res
+            return memo[i]
         
-        for i in range(len(s)-1, -1, -1):
-            if s[i] == "0": continue
-            dp[i] = dp[i+1]
-            if i+1 < len(s) and ((s[i] == "1") or (s[i]=="2" and s[i+1] in "0123456")):
-                dp[i] += dp[i+2]
-        
-        return dp[0]
+        return dfs(0)
