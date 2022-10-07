@@ -1,19 +1,17 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        def backtrack(idx, path):
-            total = sum(path)
-            if total == target:
-                result.append(path)
+        res = []
+        
+        def dfs(nums, path):
+            if sum(path) > target:
                 return
+            if sum(path) == target:
+                res.append(path)
+                return 
             
-            for j in range(idx, len(candidates)):
-                if total + candidates[j] <= target: 
-                    backtrack(j, path + [candidates[j]])
-
-            
+            for i in range(len(nums)):
+                dfs(nums[i:], path + [nums[i]])
         
-        result = []
+        dfs(candidates, [])
         
-        backtrack(0,[])
-        
-        return result
+        return res
