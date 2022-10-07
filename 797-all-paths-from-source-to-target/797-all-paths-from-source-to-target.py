@@ -1,14 +1,16 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         
-        self.ans = []
-        def dfs(node,path):
-            if node == len(graph)-1:
-                self.ans.append(path + [node])
-                return 
-            for newNode in graph[node]:
-                dfs(newNode, path + [node])
-
-        dfs(0, [])
+        res = []
         
-        return self.ans
+        queue = deque([[0, []]])
+        
+        while queue:
+            cur, path = queue.popleft()
+            if cur == len(graph)-1:
+                res.append(path + [cur])
+            
+            for node in graph[cur]:
+                queue.append([node, path + [cur]])
+        
+        return res
