@@ -1,25 +1,30 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        indegree = defaultdict(int)
+        color = defaultdict(int)
         adjlist = defaultdict(list)
         
         for i in range(len(prerequisites)):
             a, b = prerequisites[i]
             adjlist[b].append(a)
-            indegree[a] += 1
-            
-        queue = deque()
-        for i in range(numCourses):
-            if indegree[i] == 0:
-                queue.append(i)
-        ans = []       
-        while queue:
-            node = queue.popleft()
-            ans.append(node)
-            for childNode in adjlist[node]:
-                indegree[childNode] -= 1
-                if indegree[childNode] == 0:
-                    queue.append(childNode)
         
-        return ans if len(ans) == numCourses else []
+        topSortOrder = []
+        
+        def dfs(node):
+            if color[node] == 1:
+                return True
+            if color[node] == 2:
+                return False
             
+            color[node] = 1
+            
+            for childNode in adjlist[node]:
+                if dfs(childNode):
+                    return True
+            color[node] = 2
+            topSortOrder.append(node)
+            return False
+        
+        for i in range(numCourses):
+            if dfs(i): return []
+            
+        return topSortOrder[::-1]
