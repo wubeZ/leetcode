@@ -14,7 +14,6 @@ class Solution:
         for i in range(maxValue):
             prefixsum[i] = prefixsum[i - 1] + timeline[i]
         
-        print(prefixsum)
         return max(prefixsum) <= capacity
         
         
