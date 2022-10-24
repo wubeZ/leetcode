@@ -6,25 +6,14 @@
 #         self.right = right
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
-        """
-        I need the max height and all the nodes at max height
-        
-        """
         
         def dfs(node):
             if not node:
-                return
-            
-            val[0] += 1
-            if node.left:
-                dfs(node.left)
-            if node.right:
-                dfs(node.right)
-            
-            
-        val = [0]
-        dfs(root)
-        return val[0]
+                return 0
+    
+            return dfs(node.left) + dfs(node.right) + 1
+        
+        return dfs(root)
             
             
             
