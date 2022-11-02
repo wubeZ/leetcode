@@ -2,8 +2,7 @@ class Solution:
     def findComplement(self, num: int) -> int:
         ans = ""
         while num:
-            flag = num & 1
-            if flag:
+            if num & 1:
                 ans = "0" + ans
             else:
                 ans = "1" + ans
