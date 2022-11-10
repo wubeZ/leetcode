@@ -3,15 +3,14 @@ class Solution:
         res = [0] * (len(nums)+1)
         for n in nums:
             res[n] += 1
-        ans = []
+        missing, doubled = None , None
         for i in range(1,len(res)):
-            if len(ans) == 1:
+            if missing and doubled:
                 break
             if res[i] == 2:
-                ans.append(i)
-        for i in range(1,len(res)):
-            if len(ans) == 2:
-                break
+                doubled = i
             if res[i] == 0:
-                ans.append(i)
-        return ans
+                missing = i
+        
+        return [doubled, missing]
+        
