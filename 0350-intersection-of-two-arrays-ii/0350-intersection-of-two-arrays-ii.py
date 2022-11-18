@@ -10,7 +10,6 @@ class Solution:
         
         for k in keys:
             if k in counter2 and k in counter1:
-                for _ in range(min(counter1[k], counter2[k])):
-                    ans.append(k)
+                ans += [k] * min(counter1[k], counter2[k])
     
         return ans
