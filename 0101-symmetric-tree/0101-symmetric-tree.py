@@ -7,13 +7,15 @@
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         
-        def dfs(node1, node2):
-            if not node1 and not node2:
+        def solve(nodeleft, noderight):
+            if not nodeleft and not noderight:
                 return True
-            if (not node1 and node2) or (not node2 and node1):
+            if (not nodeleft and noderight) or (not noderight and nodeleft):
                 return False
-            if node1.val != node2.val:
+            if nodeleft.val != noderight.val:
                 return False
-            return dfs(node1.left, node2.right) and dfs(node1.right,node2.left)
+            
+            return solve(nodeleft.left, noderight.right) and solve(nodeleft.right, noderight.left)
         
-        return dfs(root.left, root.right)
+        return solve(root.left, root.right)
+        
