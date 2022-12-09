@@ -6,44 +6,15 @@
 #         self.right = right
 class Solution:
     def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
-        self.ans = 0
+        self.res = 0
         
-        def dfs(node):
+        def helper(node, max_val, min_val):
             if not node:
-                return (-1, -1)
+                self.res = max(self.res, max_val - min_val)
+                return
             
-            left = dfs(node.left)
-            right = dfs(node.right)
-            
-            leftmin, leftmax = left
-            rightmin, rightmax = right
-            
-            if (-1,-1) == left and (-1,-1) == right:
-                return (node.val, node.val)
-            val = 0
-            if (-1,-1) != left and (-1,-1) != right:
-                val = max(val, abs(node.val - leftmin))
-                val = max(val, abs(node.val - leftmax))
-                val = max(val, abs(node.val - rightmin))
-                val = max(val, abs(node.val - rightmax))
-            
-            if (-1,-1) == left:
-                val = max(val, abs(node.val - rightmin))
-                val = max(val, abs(node.val - rightmax))
-            if (-1,-1) == right:
-                val = max(val, abs(node.val - leftmin))
-                val = max(val, abs(node.val - leftmax))
-            
-            self.ans = max(self.ans, val)
-            
-            if (-1,-1) == left and (-1,-1) != right:
-                return (min(node.val, rightmin), max(node.val, rightmax))
-            
-            if (-1,-1) != left and (-1,-1) == right:
-                return (min(node.val, leftmin), max(node.val, leftmax))
-            
-            return (min(node.val, leftmin, rightmin), max(node.val, leftmax, rightmax))
+            helper(node.left, max(max_val, node.val), min(min_val, node.val))
+            helper(node.right, max(max_val, node.val), min(min_val, node.val))
         
-        dfs(root)
-        
-        return self.ans
+        helper(root, float('-inf'), float('inf'))
+        return self.res
