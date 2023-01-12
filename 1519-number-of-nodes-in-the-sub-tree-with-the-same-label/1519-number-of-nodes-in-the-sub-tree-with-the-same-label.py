@@ -10,25 +10,21 @@ class Solution:
         
         def countlabels(node):
             if len(tree[node]) == 0:
-                values = {labels[node] : 1}
+                values = defaultdict(int)
+                values[labels[node]] += 1
                 ans[node] = 1
                 return values
             
-            values = {}
+            values = defaultdict(int)
             
             for child in tree[node]:
                 tree[child].remove(node)
                 dictionary = countlabels(child)
                 for key in dictionary:
-                    if key in values:
-                        values[key] += dictionary[key]
-                    else:
-                        values[key] = dictionary[key]
+                    values[key] += dictionary[key]
             
-            if labels[node] in values:
-                values[labels[node]] += 1
-            else:
-                values[labels[node]] = 1
+            
+            values[labels[node]] += 1
                 
             ans[node] = values[labels[node]]
             
