@@ -1,29 +1,39 @@
 class Solution:
     def longestPath(self, parent: List[int], s: str) -> int:
         graph = defaultdict(list)
-        self.ans = 0
-        for i in range(1,len(s)):
+        
+        for i in range(1, len(parent)):
             graph[parent[i]].append(i)
         
-        def dfs(idx):
-            if idx not in graph:
+        ans = [0]
+        
+        def findlongest(node):
+            if node not in graph:
                 return 0
+            
             arr = []
-            for child in graph[idx]:
-                count = dfs(child)
-                if s[idx] != s[child]:
+            count = 0
+            
+            for child in graph[node]:
+                count = findlongest(child)
+                if s[child] != s[node]:
                     arr.append(count + 1)
+            
             arr.sort()
             val = 0
-            if len(arr) >= 2:
+            
+            if len(arr) > 1:
                 val = arr[-1] + arr[-2]
-            else:
-                val = arr[-1] if len(arr) > 0 else 0
+            elif len(arr) == 1:
+                val = arr[-1] 
+                
+            ans[0] = max(ans[0], val)
             
-            self.ans = max(self.ans, val)
+            if len(arr) > 0:
+                return arr[-1]
             
-            return arr[-1] if len(arr) > 0 else 0
+            return 0
         
+        findlongest(0)
         
-        dfs(0)
-        return self.ans + 1
+        return ans[0] + 1
