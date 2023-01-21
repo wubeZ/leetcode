@@ -13,7 +13,7 @@ class Solution:
             for i in range(1, 4):
                 if i <= len(s):
                     
-                    if int(s[:i]) <= 255:
+                    if 0 <= int(s[:i]) <= 255:
                         path.append(s[:i])
                         backtrack(s[i:], idx +1)
                         path.pop()
