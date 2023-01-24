@@ -24,9 +24,6 @@ class Solution:
             for i in range(n):
                 cur,level = queue.popleft()
                 
-                if cur == sq:
-                    ans = min(ans, level)
-                
                 for j in range(1, 7):
                     val = min(cur + j, sq)
                      
