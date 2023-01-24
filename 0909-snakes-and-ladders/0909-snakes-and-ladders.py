@@ -18,7 +18,7 @@ class Solution:
         queue = deque()
         visited = set()
         queue.append((1, 0))
-        ans = float('inf')
+        
         while queue:
             n = len(queue)
             
@@ -30,18 +30,17 @@ class Solution:
                 
                 for j in range(1, 7):
                     val = min(cur + j, sq)
-                    if val in visited:
-                        continue
                      
                     r, c = findIndex(val)
-                    if board[r][c] == -1:
+                    if board[r][c] != -1:
+                        val = board[r][c]
+                    
+                    if val == sq:
+                        return level + 1
+                    
+                    if val not in visited:
+                        visited.add(val)
                         queue.append((val, level + 1))
-                    else:
-                        queue.append((board[r][c], level + 1))
-                        
-                    visited.add(val)
-                
-        if ans == float('inf'):
-            ans = -1
+                    
             
-        return ans
+        return -1
