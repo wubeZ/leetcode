@@ -1,6 +1,5 @@
 class Solution:
     def snakesAndLadders(self, board: List[List[int]]) -> int:
-        cells = defaultdict(tuple)
         ROWS, COLS = len(board), len(board[0])
         sq = ROWS * ROWS
         
