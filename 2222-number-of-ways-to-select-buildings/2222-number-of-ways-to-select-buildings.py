@@ -1,20 +1,29 @@
 class Solution:
     def numberOfWays(self, s: str) -> int:
-        num_ones = 0
-        for ch in s:
-            if ch == '1':
-                num_ones += 1
         
-        count = 0
+        total_ones = 0
+        for i in s:
+            if i == "1":
+                total_ones += 1
+        total_zeros = len(s) - total_ones
+        
+        ans = 0
         cur_ones = 0
-        num_zeros = len(s) - num_ones
-        for i in range(len(s)):
-            if s[i] == '1':
-                cur_ones += 1
-                cur_zeros = (i + 1) - cur_ones
-                count += (cur_zeros) * (num_zeros - cur_zeros)
-            else:
-            
-                count += (cur_ones) * (num_ones - cur_ones)
+        cur_zeros = 0
         
-        return count
+        if s[0] == "1":
+            cur_ones += 1
+        else:
+            cur_zeros += 1
+        
+        for i in range(1,len(s)):
+            if s[i] == "1":
+                left_zeros = total_zeros - cur_zeros
+                ans += cur_zeros * left_zeros
+                cur_ones += 1    
+            else:
+                left_ones = total_ones - cur_ones
+                ans += cur_ones * left_ones
+                cur_zeros += 1
+        
+        return ans
