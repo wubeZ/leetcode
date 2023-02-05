@@ -4,10 +4,11 @@ class Solution:
         ans = []
         len_s = len(s)
         len_p = len(p)
-        word = sorted(p)
+        word = Counter(p)
         
         for i in range(len_s -len_p + 1):
-            if word == sorted(s[i: i+len_p]):
+            counter = Counter(s[i:i+len_p])
+            if word == counter:
                 ans.append(i)
         
         return ans
