@@ -1,13 +1,15 @@
 class Solution:
     def shuffle(self, nums: List[int], n: int) -> List[int]:
-        x = [nums[i] for i in range(n-1,-1,-1)]
-        y = [nums[i] for i in range(len(nums)-1, n-1,-1)]
-        ans = []
         
+        ans = []
+        xPtr = 0
+        yPtr = n
         for i in range(len(nums)):
             if i%2 == 0:
-                ans.append(x.pop())
+                ans.append(nums[xPtr])
+                xPtr += 1
             else:
-                ans.append(y.pop())
+                ans.append(nums[yPtr])
+                yPtr += 1
                 
         return ans
