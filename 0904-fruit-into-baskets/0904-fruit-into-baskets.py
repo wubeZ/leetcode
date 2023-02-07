@@ -2,24 +2,17 @@ class Solution:
     def totalFruit(self, fruits: List[int]) -> int:
         max_size = 1
         
-        myset = set()
+        basket = defaultdict(int)
         l = 0
-        last_postion = {}
         
         for r in range(len(fruits)):
-            myset.add(fruits[r])
-            last_postion[fruits[r]] = r
+            basket[fruits[r]] += 1
             
-            while len(myset) > 2:
-                temp, k = float("inf"), 0
-                for key in last_postion:
-                    if temp > last_postion[key]:
-                        temp = last_postion[key]
-                        k = key
-                        
-                del last_postion[k]
-                myset.remove(fruits[temp])
-                l = temp + 1
+            while len(basket) > 2:
+                basket[fruits[l]] -= 1
+                if basket[fruits[l]] == 0:
+                    del basket[fruits[l]]
+                l += 1
                 
             max_size = max(max_size, r - l + 1)
             
