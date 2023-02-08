@@ -1,19 +1,11 @@
 class Solution:
     def thirdMax(self, nums: List[int]) -> int:
-        heap = []
-        seen = set()
+        nums = set(nums)
         
-        for num in nums:
-            if num not in seen:
-                heapq.heappush(heap, num)
-                seen.add(num)
-            
-            if len(heap) > 3:
-                heapq.heappop(heap)
+        if len(nums) < 3:
+            return max(nums)
         
-        if len(heap) == 3:
-            return min(heap)
+        nums.remove(max(nums))
+        nums.remove(max(nums))
         
         return max(nums)
-        
-        
