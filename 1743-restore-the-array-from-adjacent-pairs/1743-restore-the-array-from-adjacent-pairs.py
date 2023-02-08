@@ -9,21 +9,19 @@ class Solution:
         for node in graph:
             if len(graph[node]) == 1:
                 start = node
+        ans = [start]
+        stack = [start]
+        visited = set([start])
         
-        visited = set()
-        
-        def dfs(node):
-
-            for next_node in graph[node]:
+        while stack:
+            
+            cur_node = stack.pop()
+            
+            for next_node in graph[cur_node]:
                 if next_node not in visited:
                     visited.add(next_node)
                     ans.append(next_node)
-                    dfs(next_node)
-            
-        
-        ans = [start]
-        visited.add(start)
-        dfs(start)
+                    stack.append(next_node)
         
         return ans
         
