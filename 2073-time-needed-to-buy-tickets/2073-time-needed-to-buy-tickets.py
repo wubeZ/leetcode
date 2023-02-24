@@ -3,7 +3,8 @@ class Solution:
         
         ans = 0
         idx = 0
-        while True:
+        
+        while tickets[k] != 0:
             
             if idx == len(tickets):
                 idx = 0
@@ -11,9 +12,6 @@ class Solution:
             if tickets[idx] > 0:
                 ans += 1
                 tickets[idx] -= 1
-                
-            if tickets[k] == 0:
-                break
             
             idx += 1
             
