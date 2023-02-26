@@ -1,6 +1,7 @@
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         dp = [[0]*(len(word2)+1) for i in range(len(word1)+1)]
+        
         for i in range(len(dp)):
             dp[i][-1] = len(word1) - i
         for i in range(len(dp[0])):
