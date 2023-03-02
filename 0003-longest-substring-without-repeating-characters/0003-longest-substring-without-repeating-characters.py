@@ -2,7 +2,7 @@ class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         
         left = 0
-        ans = float("-inf")
+        ans = 0
         maps = defaultdict(int)
         distinct = 1
         
@@ -20,4 +20,4 @@ class Solution:
             ans = max(ans, right - left + 1)
                 
         
-        return ans if ans != float("-inf") else 0
+        return ans
