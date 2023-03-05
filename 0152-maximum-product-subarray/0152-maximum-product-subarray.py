@@ -1,25 +1,18 @@
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        product_prefix = [1]
-        product_suffix = [1]
-        ans = float("-inf")
+        pos_product = nums[0]
+        neg_product = nums[0]
         
-        for num in nums:
-            if product_prefix[-1] == 0:
-                product_prefix.append(num)
-            else:
-                product_prefix.append(product_prefix[-1] * num)
+        ans = nums[0]
         
-        for num in nums[::-1]:
-            if product_suffix[-1] == 0:
-                product_suffix.append(num)
-            else:
-                product_suffix.append(product_suffix[-1] * num)
-        
-        product_prefix = product_prefix[1:]
-        product_suffix = product_suffix[1:]
-        
-        for i in range(len(nums)):
-            ans = max(ans, product_prefix[i], product_suffix[i])
+        for i in range(1, len(nums)):
+            
+            pos_temp = max(nums[i], pos_product*nums[i], neg_product*nums[i])
+            neg_temp = min(nums[i], pos_product*nums[i], neg_product*nums[i])            
+            
+            pos_product = pos_temp
+            neg_product = neg_temp
+            
+            ans = max(pos_product, ans)
             
         return ans
