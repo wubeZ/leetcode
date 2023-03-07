@@ -3,18 +3,23 @@ class Solution:
         stack = []
         first_number = float("inf")
         
+        minArray = []
+        min_val = float("inf")
+        
         for num in nums:
+            min_val = min(min_val, num)
+            minArray.append(min_val)
+        
+        
+        for i in range(len(nums)):
             
-            while stack and stack[-1][0] <= num:
+            while stack and nums[stack[-1]] <= nums[i]:
                 stack.pop()
             
-            if stack and stack[-1][1] < num:
+            if stack and minArray[stack[-1]] < nums[i]:
                 return True
             
-            stack.append((num, first_number))
-            
-            first_number = min(first_number, num)
-            
+            stack.append(i)
             
         return False
             
