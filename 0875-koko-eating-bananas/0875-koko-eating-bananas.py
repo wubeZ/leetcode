@@ -6,9 +6,8 @@ class Solution:
             hours += math.ceil(num / mid)
 
         return hours <= h
-
-    def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        
+    
+    def solve(self, piles, h):
         left = 0
         right = max(piles)
         
@@ -25,4 +24,9 @@ class Solution:
         
         
         return right
+                
+
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        
+        return self.solve(piles, h)
                 
