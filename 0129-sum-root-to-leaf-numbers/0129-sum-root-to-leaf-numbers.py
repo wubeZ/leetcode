@@ -5,19 +5,28 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        self.ans = 0
-        def dfs(node, n):
-            if not node:
-                return
-            n = (n*10) + node.val
-            
-            if not node.left and not node.right:
-                self.ans += n
-                
-            dfs(node.left, n)
-            dfs(node.right, n)
-            
+    def __init__(self):
+        self.total = 0
         
-        dfs(root, 0)
-        return self.ans
+    def traverse(self, node, count):
+        if not node:
+            return 
+        
+        if not node.left and not node.right:
+            count = (count * 10) + node.val
+            self.total += count
+            
+            return 
+        
+        count = (count * 10) + node.val
+        
+        self.traverse(node.left, count)
+        self.traverse(node.right, count)
+        
+            
+            
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        
+        self.traverse(root, 0)
+        
+        return self.total
