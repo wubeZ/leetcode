@@ -5,21 +5,23 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.pathSum = -1003
+        
+        
+    def traverse(self, node):
+        if not node:
+            return 0
+        
+        left = self.traverse(node.left)
+        right = self.traverse(node.right)
+        
+        self.pathSum = max(self.pathSum, node.val, node.val + left, node.val + right, node.val + left + right)
+        
+        return max(node.val + left, node.val + right, node.val)
+    
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        self.ans = -1001
-        def dfs(node):
-            if not node:
-                return 0
-            left = dfs(node.left)
-            right = dfs(node.right)
-            
-            subtotal = left + right + node.val
-            
-            self.ans = max(self.ans, subtotal)
-            
-            return max(left+node.val,right+node.val, 0)
         
+        self.traverse(root)
         
-        dfs(root)
-        
-        return self.ans
+        return self.pathSum
