@@ -1,67 +1,31 @@
 class Solution:
     
-    def solve(self, s, left, right):
-        if s[left] in "0123456789" and s[right] == "]":
-            opening = 0
-            idx = -1
-            
-            for i in range(left, right + 1):
-                if opening > 1:
-                    break
+    def solve(self, index, prev_sum, prev_string, s):
+        
+        while index < len(s):
+            while s[index].isdigit():
+                prev_sum = prev_sum * 10 + int(s[index])
+                index += 1
                 
-                if s[i] == "[":
-                    opening += 1
-                
-                if idx == -1 and s[i] == "[":
-                    idx = i
-                
-            if opening == 1:
-                val = s[idx + 1: right] * int(s[left:idx])
-                return val
-            
-            
-            
-        arr = []
+            if s[index] == "[":
+                new_index, strings = self.solve(index + 1, 0, "", s)
+                prev_string += (strings * prev_sum)
+                index = new_index
+                prev_sum = 0
 
-        while left <= right:
-            if not s[left] in "0123456789":
-                arr.append(s[left])
-                left += 1
+            elif s[index] == "]":
+                return index, prev_string
+
             else:
-                opening = 0
-                closing = 0
-                idx = -1
-                l = left
+                prev_string += s[index]
+            
+            index += 1
 
-                while True:
-
-                    if s[left] == "[":
-                        opening += 1
-                    if idx == -1 and s[left] == "[":
-                        idx = left
-                    if s[left] == "]":
-                        closing += 1
-
-                    if closing > 0 and opening == closing:
-                        break
-                    
-                    if left > right:
-                        break
-                    
-                    left += 1
-
-                val = self.solve(s, idx + 1, left-1)
-                res = val * int(s[l:idx])
-                left += 1
-                arr.append(res)
-
-        return "".join(arr)
+        return index, prev_string
                     
         
     def decodeString(self, s: str) -> str:
         
-        if s in "0123456789":
-            return ""
+        index, final_string = self.solve(0, 0, "", s)
         
-        return self.solve(s, 0, len(s)-1)
-        
+        return final_string
