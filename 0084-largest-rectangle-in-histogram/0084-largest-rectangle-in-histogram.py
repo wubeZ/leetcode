@@ -1,6 +1,7 @@
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
         
+        heights.append(0)
         stack = []
         
         ans = 0
@@ -16,14 +17,5 @@ class Solution:
                 ans = max(ans, area)
             
             stack.append(i)
-            
-            
-        while stack:
-            top = stack.pop()
-            width = len(heights) - 1 - (stack[-1] if stack else -1) 
-            length = heights[top]
-            
-            area = length * width
-            ans = max(ans, area)
-    
+        
         return ans
