@@ -10,8 +10,6 @@ class Solution:
         
         if k > mid:
             res = self.kthGrammar(n - 1, k - mid)
-            if res == 0:
-                return 1
-            return 0
+            return 1 if res == 0 else 0
 
         return self.kthGrammar(n - 1, k)
