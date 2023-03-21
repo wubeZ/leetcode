@@ -17,21 +17,21 @@ class Solution:
             arr.append(cur.val)
             cur = cur.next
                     
-        def create(l, r):
-            if l >= r:
-                if l == r:
-                    return TreeNode(arr[r])
+        def create(arr):
+            if not arr:
                 return None
+            if len(arr) == 1:
+                return TreeNode(arr[0])
             
-            mid = (l+r)//2
+            mid = len(arr)//2
             node = TreeNode(arr[mid])
             
-            node.left = create(l, mid - 1)
-            node.right = create(mid + 1, r)
+            node.left = create(arr[: mid])
+            node.right = create(arr[mid + 1:])
             
             return node
             
         
-        return create(0, len(arr)-1)
+        return create(arr)
             
             
