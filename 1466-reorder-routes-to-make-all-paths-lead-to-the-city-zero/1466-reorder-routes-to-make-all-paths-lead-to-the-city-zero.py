@@ -19,6 +19,7 @@ class Solution:
             for child in adjacency[cur]:
                 if child == parent:
                     continue
+                    
                 if cur not in graph[child]:
                     res += 1
                         
