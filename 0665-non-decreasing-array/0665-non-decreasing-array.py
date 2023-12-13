@@ -1,17 +1,24 @@
 class Solution:
     def checkPossibility(self, nums: List[int]) -> bool:
-        count = 0
+        leftCount = 0
+        rightCount = 0
+        stack = []
         
-        for i in range(len(nums)-1):
-            if nums[i] > nums[i+1]:
-                if i == 0:
-                    nums[i] = nums[i+1]
-                else:
-                    if nums[i-1] > nums[i+1]:
-                        nums[i+1] = nums[i]
-                    else:
-                        nums[i] = nums[i+1]
-                count += 1
+        for i in range(len(nums)):
+            while stack and stack[-1] > nums[i]:
+                stack.pop()
+                leftCount += 1
+            stack.append(nums[i])
+        
+        stack = []
+        for i in range(len(nums)-1, -1,-1):
+            while stack and stack[-1] < nums[i]:
+                stack.pop()
+                rightCount += 1
+            stack.append(nums[i])
+            
+        
+        count = min(leftCount, rightCount)
             
             
         return count <= 1
