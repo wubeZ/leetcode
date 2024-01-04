@@ -1,0 +1,31 @@
+class Solution:
+    def numRescueBoats(self, people: List[int], limit: int) -> int:
+        people.sort(reverse = True)
+        
+        left = 0
+        right = len(people)-1
+        
+        count = 0
+        
+        while left < right:
+            if people[left] >= limit:
+                count += 1
+                left += 1
+                if left == right:
+                    count += 1
+                continue
+            
+            if people[left] + people[right] <= limit:
+                count += 1
+                left += 1
+                right -= 1
+            else:
+                left += 1
+                count += 1
+            
+            if left == right:
+                count += 1
+        
+        
+        return count
+        
