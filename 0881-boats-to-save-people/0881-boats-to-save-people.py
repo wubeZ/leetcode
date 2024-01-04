@@ -8,13 +8,6 @@ class Solution:
         count = 0
         
         while left < right:
-            if people[left] >= limit:
-                count += 1
-                left += 1
-                if left == right:
-                    count += 1
-                continue
-            
             if people[left] + people[right] <= limit:
                 count += 1
                 left += 1
