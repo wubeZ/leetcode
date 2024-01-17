@@ -1,51 +1,23 @@
 class Solution:
     def intToRoman(self, num: int) -> str:
+        num_map = {
+            1: "I",
+            5: "V",    4: "IV",
+            10: "X",   9: "IX",
+            50: "L",   40: "XL",
+            100: "C",  90: "XC",
+            500: "D",  400: "CD",
+            1000: "M", 900: "CM",
+        }
         
-        string = str(num)
-        ans = []
+        res = []
         
-        for i in range(len(string)):
-            power = len(string) - (i+1)
+        for n in [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]:
             
-            needed = int(string[i]) * (10**(power))
-            
-            if power == 0:
-                if needed == 4:
-                    cur = "IV"
-                elif needed == 9:
-                    cur = "IX"
-                else:
-                    if needed < 4:
-                        cur = "I" * needed
-                    else:
-                        cur = "V" + ("I" * (needed - 5))
-            elif power == 1:
-                if needed == 40:
-                    cur = "XL"
-                elif needed == 90:
-                    cur = "XC"
-                else:
-                    if needed < 40:
-                        cur = "X" * (needed//10)
-                    else:
-                        cur = "L" + ("X" * ((needed - 50)//10))
-                        print(needed - 50)
-                
-            elif power == 2:
-                if needed == 400:
-                    cur = "CD"
-                elif needed == 900:
-                    cur = "CM"
-                else:
-                    if needed < 400:
-                        cur = "C" * (needed//100)
-                    else:
-                        cur = "D" + ("C" * ((needed - 500)//100))
-                
-            else:
-                cur = "M" * (needed//1000) 
-            
-            ans.append(cur)
+            while n <= num:
+                res.append(num_map[n])
+                num -= n
         
-        return "".join(ans)
+        return "".join(res)
+        
             
