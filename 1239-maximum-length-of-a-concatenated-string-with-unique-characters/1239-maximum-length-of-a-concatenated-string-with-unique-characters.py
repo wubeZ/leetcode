@@ -3,12 +3,13 @@ class Solution:
         ans = [0]
         def solve(i, path):
             if i >= len(arr):
-                word = "".join(path)
-                if len(set(word)) == len(word):
-                    ans[0] = max(ans[0], len(word))
+                if len(set(path)) == len(path):
+                    ans[0] = max(ans[0], len(path))
                 return 
-            solve(i + 1, path)
-            solve(i + 1, path + [arr[i]])       
+            
+            if len(path) == len(set(path)):
+                solve(i + 1, path)
+                solve(i + 1, path + list(arr[i]))       
         
         
         solve(0, [])
