@@ -9,16 +9,14 @@ class Solution:
         ans = [0]
         def dfs(node):
             if not node:
-                return -1
-            if not node.left and not node.right:
                 return 0
             
-            left = dfs(node.left) + 1
-            right = dfs(node.right) + 1
+            left = dfs(node.left)
+            right = dfs(node.right)
             
             ans[0] = max(ans[0], left + right)
             
-            return max(left, right)
+            return max(left, right) + 1
         
         
         dfs(root)
