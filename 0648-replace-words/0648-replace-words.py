@@ -20,21 +20,6 @@ class Solution:
         cur.isword = True
         cur.word = word
         
-    
-    def find(self, word):
-        cur = self.root
-            
-        for w in word:
-            if cur.isword:
-                return cur.word
-
-            if w not in cur.children:
-                return word
-
-            cur = cur.children[w]
-            
-        return word
-    
     def replaceWords(self, dictionary: List[str], sentence: str) -> str:
         
         for w in dictionary:
@@ -42,7 +27,23 @@ class Solution:
         
         ans = []
         for word in sentence.split(" "):
-            ans.append(self.find(word))
+            cur = self.root
+            flag = False
+            c = 0
+            for w in word:
+                if cur.isword:
+                    ans.append(cur.word)
+                    break
+                    
+                if w not in cur.children:
+                    flag = True
+                    break
+                    
+                cur = cur.children[w]
+                c += 1
+            
+            if flag or c == len(word):
+                ans.append(word)
                 
         
         return " ".join(ans)
