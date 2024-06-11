@@ -3,7 +3,7 @@ class Solution:
         counter = Counter(arr1)
         counter2 = Counter(arr2)
         ans = []
-        for elem in arr2:
+        for elem in counter2:
             for _ in range(counter[elem]):
                 ans.append(elem)
         
